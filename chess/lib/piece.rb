@@ -1,15 +1,14 @@
-require_relative "board"
-
+require_relative 'board.rb'
 class Piece
-
-    include Slideable
 
     attr_reader :pos, :color, :board
     def initialize(color, board, pos = nil)
+
         @pos = pos
         @color = color 
         @board = Board
     end 
+
 
     def to_s
 

@@ -4,6 +4,18 @@ class Board
     attr_reader :grid, :null_piece
     def initialize
         @grid = Array.new(8) {Array.new(8)}
+        
+    end
+
+    def populate_white_piece
+        @grid[0].map! {|piece| Piece.new("piece")}
+        @grid[1].map! {|piece| Piece.new("piece")}
+        @grid[6].map! {|piece| Piece.new("piece")}
+        @grid[7].map! {|piece| Piece.new("piece")}
+        @grid 
+    end
+
+    def populate_black_piece
         @grid[0].map! {|piece| Piece.new("piece")}
         @grid[1].map! {|piece| Piece.new("piece")}
         @grid[6].map! {|piece| Piece.new("piece")}
@@ -34,5 +46,6 @@ class Board
         self[start_pos] = nil 
 
     end 
+
 
 end 
