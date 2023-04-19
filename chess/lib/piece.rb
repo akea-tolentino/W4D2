@@ -6,7 +6,7 @@ class Piece
 
         @pos = pos
         @color = color 
-        @board = Board
+        @board = board
     end 
 
 
