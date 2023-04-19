@@ -43,7 +43,7 @@ module Slideable
             moves_in_dir << next_pos
         end 
 
-        while on_board?(curr_pos) && board[curr_pos].nil?
+        while on_board?(curr_pos) && (board[curr_pos].nil? || board[curr_pos].color != self.color)
             
             cx, cy = cx + dx, cy + dy
             new_pos = [cx, cy]
