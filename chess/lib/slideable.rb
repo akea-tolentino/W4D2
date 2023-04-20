@@ -1,6 +1,3 @@
-
-require "byebug"
-
 module Slideable 
     HORIZONTAL_DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]]
     DIAGONAL_DIRS = [[1, 1], [1, -1], [-1, -1], [-1, 1]]
@@ -24,18 +21,12 @@ module Slideable
         potential_pos
     end
 
-
-
-    # def move_dirs
-    # end 
-
     def grow_unblocked_moves_in_dir(dir)
         dx, dy = dir
         cx, cy = self.pos
         curr_pos = self.pos 
        
         moves_in_dir = []
-
         next_pos = [cx + dx, cy + dy]
 
         if on_board?(next_pos)
@@ -43,22 +34,20 @@ module Slideable
             moves_in_dir << next_pos
         end 
 
-        while on_board?(curr_pos) && (board[curr_pos].nil? || board[curr_pos].color != self.color)
+        while on_board?(curr_pos) && (board[curr_pos] == self.board.null_piece || board[curr_pos].color != self.color)
             
+            break if self.board[curr_pos].color != self.color && board[curr_pos] != self.board.null_piece
+
             cx, cy = cx + dx, cy + dy
             new_pos = [cx, cy]
             moves_in_dir << curr_pos if !moves_in_dir.include?(curr_pos)
             curr_pos = new_pos
         end
 
-        #if the color of the piece in the position is not the 
-        #same as our piece, we can add this move to moves
-        if self.pos != nil && self.color != self.board[self.pos].color 
-        end
+        moves_in_dir << curr_pos if on_board?(curr_pos) && curr_pos != self.board.null_piece && self.color != self.board[curr_pos].color
         
         moves_in_dir
     end
-
 
     def on_board?(pos)
         row, col = pos

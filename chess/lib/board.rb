@@ -1,9 +1,13 @@
 require_relative "piece"
+require_relative 'null_piece'
+require 'byebug'
 
 class Board 
+    
     attr_reader :grid, :null_piece
     def initialize
-        @grid = Array.new(8) {Array.new(8)}
+        @null_piece = NullPiece.instance
+        @grid = Array.new(8) {Array.new(8, @null_piece)}
         
     end
 
@@ -34,16 +38,16 @@ class Board
     end 
     
     def move_piece(start_pos, end_pos)
-        if self[start_pos] == nil
+        if self[start_pos] == NullPiece.instance
             raise "no piece to move"
         end 
 
-        if !self[end_pos] == nil
+        if !self[end_pos] == NullPiece.instance
             raise "pos already occupied"
         end 
 
         self[end_pos] = self[start_pos]
-        self[start_pos] = nil 
+        self[start_pos] = NullPiece.instance 
 
     end 
 
